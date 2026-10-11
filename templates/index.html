@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HouseAI — House Price Prediction</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     NAVBAR
+========================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🏠
+        </div>
+
+        <span>House<span class="logo-ai">AI</span></span>
+
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="#predict">Predict</a>
+
+        <a href="#insights">Insights</a>
+
+        <a href="#about">About</a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- ==========================================
+     HERO SECTION
+========================================== -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+
+            <span class="badge-dot"></span>
+
+            AI-POWERED HOUSE PRICE PREDICTION
+
+        </div>
+
+
+        <h1>
+
+            Predict the value of a home
+            <span>with machine learning.</span>
+
+        </h1>
+
+
+        <p class="hero-description">
+
+            Enter a few details about a property and our
+            machine learning model will estimate its
+            market value instantly.
+
+        </p>
+
+
+        <a href="#predict" class="hero-button">
+
+            Predict House Price
+
+            <span>↓</span>
+
+        </a>
+
+    </div>
+
+
+    <div class="hero-card">
+
+        <div class="house-icon">
+            🏡
+        </div>
+
+        <div>
+
+            <p class="small-label">
+                AI ESTIMATION
+            </p>
+
+            <h3>
+                Smart Property Analysis
+            </h3>
+
+            <p>
+                Data-driven predictions based on housing features.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     PREDICTION SECTION
+========================================== -->
+
+<section class="prediction-section" id="predict">
+
+    <div class="section-heading">
+
+        <span class="section-tag">
+            PREDICTION
+        </span>
+
+        <h2>
+            Tell us about the property
+        </h2>
+
+        <p>
+            Enter the property details below to receive an
+            AI-powered price estimate.
+        </p>
+
+    </div>
+
+
+
+    <div class="prediction-layout">
+
+
+        <!-- FORM -->
+
+        <div class="form-card">
+
+            <form id="predictionForm">
+
+
+                <div class="form-section-title">
+
+                    <span>01</span>
+
+                    Property Information
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- Overall Quality -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Overall Quality
+                        </label>
+
+                        <input
+                            type="number"
+                            name="overall_qual"
+                            min="1"
+                            max="10"
+                            step="1"
+                            placeholder="Example: 7"
+                            required
+                        >
+
+                        <small>
+                            Quality rating from 1–10
+                        </small>
+
+                    </div>
+
+
+                    <!-- Living Area -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Living Area
+                        </label>
+
+                        <input
+                            type="number"
+                            name="gr_liv_area"
+                            min="100"
+                            step="1"
+                            placeholder="Example: 1800"
+                            required
+                        >
+
+                        <small>
+                            Above-ground living area in sq ft
+                        </small>
+
+                    </div>
+
+
+                    <!-- Garage Cars -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Garage Capacity
+                        </label>
+
+                        <input
+                            type="number"
+                            name="garage_cars"
+                            min="0"
+                            step="1"
+                            placeholder="Example: 2"
+                            required
+                        >
+
+                        <small>
+                            Number of cars garage can hold
+                        </small>
+
+                    </div>
+
+
+                    <!-- Basement -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Basement Area
+                        </label>
+
+                        <input
+                            type="number"
+                            name="total_bsmt_sf"
+                            min="0"
+                            step="1"
+                            placeholder="Example: 1000"
+                            required
+                        >
+
+                        <small>
+                            Basement area in sq ft
+                        </small>
+
+                    </div>
+
+
+                    <!-- First Floor -->
+
+                    <div class="input-group">
+
+                        <label>
+                            First Floor Area
+                        </label>
+
+                        <input
+                            type="number"
+                            name="first_flr_sf"
+                            min="0"
+                            step="1"
+                            placeholder="Example: 1200"
+                            required
+                        >
+
+                        <small>
+                            First floor area in sq ft
+                        </small>
+
+                    </div>
+
+
+                    <!-- Year Built -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Year Built
+                        </label>
+
+                        <input
+                            type="number"
+                            name="year_built"
+                            min="1800"
+                            max="2026"
+                            step="1"
+                            placeholder="Example: 2005"
+                            required
+                        >
+
+                        <small>
+                            Original construction year
+                        </small>
+
+                    </div>
+
+
+                    <!-- Bathrooms -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Full Bathrooms
+                        </label>
+
+                        <input
+                            type="number"
+                            name="full_bath"
+                            min="0"
+                            max="10"
+                            step="1"
+                            placeholder="Example: 2"
+                            required
+                        >
+
+                        <small>
+                            Number of full bathrooms
+                        </small>
+
+                    </div>
+
+
+                    <!-- Bedrooms -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Bedrooms
+                        </label>
+
+                        <input
+                            type="number"
+                            name="bedroom_abvgr"
+                            min="0"
+                            max="20"
+                            step="1"
+                            placeholder="Example: 3"
+                            required
+                        >
+
+                        <small>
+                            Bedrooms above ground
+                        </small>
+
+                    </div>
+
+
+                    <!-- Garage Area -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Garage Area
+                        </label>
+
+                        <input
+                            type="number"
+                            name="garage_area"
+                            min="0"
+                            step="1"
+                            placeholder="Example: 500"
+                            required
+                        >
+
+                        <small>
+                            Garage area in sq ft
+                        </small>
+
+                    </div>
+
+
+                    <!-- Lot Area -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Lot Area
+                        </label>
+
+                        <input
+                            type="number"
+                            name="lot_area"
+                            min="0"
+                            step="1"
+                            placeholder="Example: 10000"
+                            required
+                        >
+
+                        <small>
+                            Property lot area in sq ft
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="predict-button"
+                    id="predictButton"
+                >
+
+                    <span id="buttonText">
+                        Predict House Price
+                    </span>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+            </form>
+
+        </div>
+
+
+
+        <!-- RESULT -->
+
+        <div class="result-card" id="resultCard">
+
+            <div class="result-top">
+
+                <span class="result-label">
+                    AI ESTIMATE
+                </span>
+
+                <span class="result-status">
+                    ● READY
+                </span>
+
+            </div>
+
+
+            <div class="result-icon">
+                $
+            </div>
+
+
+            <p class="result-title">
+                Estimated House Value
+            </p>
+
+
+            <h2 id="priceResult">
+                —
+            </h2>
+
+
+            <p class="result-message" id="resultMessage">
+
+                Complete the property details and
+                click predict to see the estimated value.
+
+            </p>
+
+
+            <div class="result-divider"></div>
+
+
+            <div class="result-info">
+
+                <div>
+
+                    <span>
+                        MODEL
+                    </span>
+
+                    <strong>
+                        Machine Learning
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        ANALYSIS
+                    </span>
+
+                    <strong>
+                        Ames Housing
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     INSIGHTS
+========================================== -->
+
+<section class="insights-section" id="insights">
+
+
+    <div class="section-heading">
+
+        <span class="section-tag">
+            DATA INSIGHTS
+        </span>
+
+        <h2>
+            Understand the housing market
+        </h2>
+
+        <p>
+            Visual analysis of the data used to build
+            our house price prediction model.
+        </p>
+
+    </div>
+
+
+
+    <div class="charts-grid">
+
+
+        <!-- PRICE DISTRIBUTION -->
+
+        <div class="chart-card chart-large">
+
+            <div class="chart-header">
+
+                <div>
+
+                    <span>
+                        DATA DISTRIBUTION
+                    </span>
+
+                    <h3>
+                        House Price Distribution
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <p>
+                Distribution of sale prices across the
+                housing dataset.
+            </p>
+
+
+            <img
+                src="{{ url_for('static', filename='images/price_distribution.png') }}"
+                alt="House Price Distribution"
+            >
+
+        </div>
+
+
+
+        <!-- AREA PRICE -->
+
+        <div class="chart-card">
+
+            <div class="chart-header">
+
+                <div>
+
+                    <span>
+                        PROPERTY ANALYSIS
+                    </span>
+
+                    <h3>
+                        Living Area vs Price
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <p>
+                Relationship between living area
+                and house sale price.
+            </p>
+
+
+            <img
+                src="{{ url_for('static', filename='images/area_price.png') }}"
+                alt="Living Area vs Price"
+            >
+
+        </div>
+
+
+
+        <!-- FEATURE IMPORTANCE -->
+
+        <div class="chart-card">
+
+            <div class="chart-header">
+
+                <div>
+
+                    <span>
+                        MACHINE LEARNING
+                    </span>
+
+                    <h3>
+                        Feature Importance
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <p>
+                Features that contribute most to the
+                model's predictions.
+            </p>
+
+
+            <img
+                src="{{ url_for('static', filename='images/feature_importance.png') }}"
+                alt="Feature Importance"
+            >
+
+        </div>
+
+
+
+        <!-- CORRELATION -->
+
+        <div class="chart-card chart-full">
+
+            <div class="chart-header">
+
+                <div>
+
+                    <span>
+                        EXPLORATORY DATA ANALYSIS
+                    </span>
+
+                    <h3>
+                        Feature Correlation
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <p>
+                Correlation between numerical features
+                in the housing dataset.
+            </p>
+
+
+            <img
+                src="{{ url_for('static', filename='images/correlation.png') }}"
+                alt="Correlation Heatmap"
+            >
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     HOW IT WORKS
+========================================== -->
+
+<section class="how-section" id="about">
+
+
+    <div class="section-heading">
+
+        <span class="section-tag">
+            HOW IT WORKS
+        </span>
+
+        <h2>
+            From property details to prediction
+        </h2>
+
+    </div>
+
+
+    <div class="steps">
+
+
+        <div class="step">
+
+            <div class="step-number">
+                01
+            </div>
+
+            <h3>
+                Enter Details
+            </h3>
+
+            <p>
+                Provide important information about
+                the property.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                02
+            </div>
+
+            <h3>
+                Machine Learning
+            </h3>
+
+            <p>
+                Your information is processed by
+                the trained prediction model.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                03
+            </div>
+
+            <h3>
+                Get Estimate
+            </h3>
+
+            <p>
+                The model produces an estimated
+                house sale price.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     FOOTER
+========================================== -->
+
+<footer>
+
+    <div class="footer-logo">
+        🏠 HouseAI
+    </div>
+
+    <p>
+        Machine Learning House Price Prediction Project
+    </p>
+
+    <p class="copyright">
+        Built with Python • Flask • Pandas • Scikit-learn
+    </p>
+
+</footer>
+
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
